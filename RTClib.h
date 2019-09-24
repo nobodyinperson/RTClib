@@ -246,7 +246,7 @@ enum Ds3231SqwPinMode {
 /**************************************************************************/
 class RTC_DS3231 {
 public:
-  boolean begin(void);
+  boolean isRunning(void);
   static void adjust(const DateTime& dt);
   bool lostPower(void);
   static DateTime now();
