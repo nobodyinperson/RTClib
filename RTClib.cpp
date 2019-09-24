@@ -958,7 +958,7 @@ void RTC_PCF8523::calibrate(Pcf8523OffsetMode mode, int8_t offset) {
 /**************************************************************************/
 boolean RTC_DS3231::begin(void) {
   Wire.begin();
-  Wire.beginTransmission(0x68);
+  Wire.beginTransmission(DS3231_ADDRESS);
   if (Wire.endTransmission() == 0) {
     return true;
   } else {
