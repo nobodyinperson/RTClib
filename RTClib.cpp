@@ -168,8 +168,8 @@ DateTime::DateTime(uint32_t t) {
   uint8_t leap;
   for (yOff = 0;; ++yOff) {
     leap = yOff % 4 == 0;
-    if (days < 365 + leap) break;
-    days -= 365 + leap;
+    if (days < 365U + leap) break;
+    days -= 365U + leap;
   }
   for (m = 1;; ++m) {
     uint8_t daysPerMonth = pgm_read_byte(daysInMonth + m - 1);
@@ -337,7 +337,7 @@ DateTime::DateTime(const __FlashStringHelper* date,
 /**************************************************************************/
 
 char* DateTime::toString(char* buffer) {
-  for (int i = 0; i < strlen(buffer) - 1; i++) {
+  for (size_t i = 0; i < strlen(buffer) - 1; i++) {
     if (buffer[i] == 'h' && buffer[i + 1] == 'h') {
       buffer[i] = '0' + hh / 10;
       buffer[i + 1] = '0' + hh % 10;
