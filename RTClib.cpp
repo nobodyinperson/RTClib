@@ -111,8 +111,8 @@ static void write_i2c_register(uint8_t addr, uint8_t reg, uint8_t val) {
 /**************************************************************************/
 
 /** Number of days in each month */
-const uint8_t daysInMonth[] PROGMEM = {31, 28, 31, 30, 31, 30, 31,
-                                       31, 30, 31, 30, 31, 0};
+const uint8_t daysInMonth[] PROGMEM = {31, 28, 31, 30, 31, 30,
+                                       31, 31, 30, 31, 30};
 // WARNING: The appended 0 is useless but necessary
 // to prevent an optimization conflict with the Time library. See
 // https://github.com/adafruit/RTClib/issues/114 for further information.
@@ -171,7 +171,7 @@ DateTime::DateTime(uint32_t t) {
     if (days < 365U + leap) break;
     days -= 365U + leap;
   }
-  for (m = 1;; ++m) {
+  for (m = 1; m < 12; ++m) {
     uint8_t daysPerMonth = pgm_read_byte(daysInMonth + m - 1);
     if (leap && m == 2) ++daysPerMonth;
     if (days < daysPerMonth) break;
