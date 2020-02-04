@@ -1,18 +1,24 @@
 #include <RTClib.h>
+#if ESP8266
+#include <Wire.h>
+#else
 #include <WireNoFreeze.h>
+#endif
 
 RTC_DS1307 rtc;
 
-void setup() {
+void
+setup()
+{
   while (!Serial)
-    ;  // for Leonardo/Micro/Zero
+    ; // for Leonardo/Micro/Zero
 
   Serial.begin(57600);
   if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
     while (1)
       ;
-  }  // end rtc.begin()
+  } // end rtc.begin()
 
   if (!rtc.isrunning()) {
     Serial.println("RTC is NOT running!");
@@ -24,7 +30,9 @@ void setup() {
   }
 }
 
-void loop() {
+void
+loop()
+{
   DateTime now = rtc.now();
 
   // buffer can be defined using following combinations:
